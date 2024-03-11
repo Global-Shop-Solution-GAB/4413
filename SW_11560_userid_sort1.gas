@@ -1,0 +1,48 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+
+V.Local.userid.Declare(String)
+V.Local.sort1.Declare(String)
+
+'if sales order
+F.Intrinsic.Control.If(V.Caller.Hook,=,"11560")
+	V.Local.sort1.Set(V.Passed.000045)
+	V.Passed.000117.Set("Created By")
+	F.Intrinsic.Control.If(V.Local.sort1,=,"")
+	'set the order sort field to the userid
+	V.Passed.000045.Set(V.Caller.User)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.End
+
+F.Intrinsic.Control.EndIf
+
+'if quote
+F.Intrinsic.Control.If(V.Caller.Hook,=,"10710")
+	V.Local.sort1.Set(V.Passed.000045)
+	V.Passed.000143.Set("Created By")
+	F.Intrinsic.Control.If(V.Local.sort1,=,"")
+	'set the order sort field to the userid
+	V.Passed.000045.Set(V.Caller.User)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.End
+
+F.Intrinsic.Control.EndIf
+
+
+
+
+Program.Sub.main.End
+
+Program.Sub.Comments.Start
+${$0$}$SW_11560$}$Brady$}$02/09/17 1:05:53 PM$}$False
+${$1$}$$}$$}$1$}$10710$}$QTS0200A-POPULATE-HOOK$}$02/09/17 1:27:40 PM$}$(Program: QTE200; Screen: QTS0200A)
+
+${$1$}$$}$$}$0$}$11560$}$OES0200A-POPULATE-HOOK$}$02/09/17 1:27:17 PM$}$(Program: ORD200; Screen: OES0200A)
+
+Program.Sub.Comments.End
